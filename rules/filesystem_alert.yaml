@@ -1,5 +1,5 @@
-es_host: 172.25.13.124
-es_port: 9200
+es_host: x.x.x.x
+es_port: xxxx
 index: metricbeat-*
 name: Filesystem_Usage_Alert
 type: any
@@ -7,8 +7,6 @@ type: any
 query_key: beat.hostname
 doc_type: doc
 filter:
-#  - term:
-#      beat.hostname: "ip-172-25-13-124.aws-use1.cloud.marriott.com"
   - range:
       system.filesystem.used.pct:
         from: 0.75
@@ -19,6 +17,6 @@ realert:
 alert:
 - slack
 slack:
-slack_webhook_url: "https://hooks.slack.com/services/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"
-slack_channel_override: "#marriott-aws-devops"
-slack_username_override: "@Elastalert Admin"
+slack_webhook_url: 
+slack_channel_override: 
+slack_username_override: 
