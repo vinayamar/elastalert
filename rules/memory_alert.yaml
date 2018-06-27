@@ -1,0 +1,33 @@
+es_host: 172.25.13.124
+es_port: 9200
+index: metricbeat-*
+name: High Memory Usage Alert
+type: metric_aggregation
+
+metric_agg_key: system.memory.actual.used.pct
+metric_agg_type: avg
+
+doc_type: doc
+query_key: beat.hostname
+
+bucket_interval:
+  seconds: 10
+
+sync_bucket_interval: true
+
+#min_threshold: 0.1
+max_threshold: 0.75
+
+filter:
+- term:
+    metricset.name: memory
+
+alert:
+- slack
+slack:
+slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_channel_override: "#marriott-aws-devops"
+slack_username_override: "@Admin"
+
+#realert:
+#minutes: 10

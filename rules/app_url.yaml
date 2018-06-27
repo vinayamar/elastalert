@@ -1,0 +1,36 @@
+es_host: 172.25.13.124
+es_port: 9200
+index: heartbeat-*
+type: frequency
+name: Application URL Down
+
+timeframe:
+  minutes: 1
+realert:
+  minutes: 5
+
+num_events: 1
+
+filter:
+- term:
+    monitor.status: "down"
+- term:
+    monitor.type: "http"
+
+include: ["alert_time","error.message","@timestamp", "http.url"]
+
+alert:
+  - slack
+alert_subject: "URL {0} is down "
+alert_subject_args:
+  - http.url
+alert_text: |
+  Error Message: "{2}"
+alert_text_args:
+  - http.url
+  - "@alert_time"
+  - error.message
+slack:
+slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_channel_override: "#marriott-aws-devops"
+slack_username_override: "@Admin"

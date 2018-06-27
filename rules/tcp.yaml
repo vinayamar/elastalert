@@ -1,0 +1,40 @@
+es_host: 172.25.13.124
+es_port: 9200
+index: heartbeat-*
+type: frequency
+name: TCP Down
+
+timeframe:
+  minutes: 1
+realert:
+  minutes: 2
+
+num_events: 1
+
+filter:
+- term:
+    monitor.status: "down"
+- term:
+    monitor.type: "tcp"
+
+include: ["beat.hostname","monitor.host","tcp.port","alert_time","error.message","@timestamp"]
+
+alert:
+  - slack
+alert_subject: "Service {0}:{1} is not reachable "
+alert_subject_args:
+  - monitor.host
+  - tcp.port
+alert_text: |
+  Service {0}:{1} is not reachable from {2}
+  Error Message: " {3}"
+alert_text_args:
+  - monitor.host
+  - tcp.port
+  - beat.hostname
+  - error.message
+slack:
+slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_channel_override: "#marriott-aws-devops"
+slack_username_override: "@Admin"
+
