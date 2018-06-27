@@ -1,8 +1,8 @@
 name: CPU Overall Load Alert
 type: metric_aggregation
 
-es_host: 172.25.13.124 
-es_port: 9200
+es_host: x.x.x.x
+es_port: xxxx
 index: metricbeat-*
 
 metric_agg_key: system.load.norm.5
@@ -25,9 +25,9 @@ filter:
 alert:
 - slack
 slack:
-slack_webhook_url: "https://hooks.slack.com/services/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"
-slack_channel_override: "#marriott-aws-devops"
-slack_username_override: "@Elastalert Admin"
+slack_webhook_url: 
+slack_channel_override: 
+slack_username_override: 
 
 #realert:
 #minutes: 10
